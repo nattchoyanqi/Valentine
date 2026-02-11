@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question...</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #89CFF0; /* Baby Blue */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            z-index: 10;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #1a73e8;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #444;
+        }
+
+        .buttons {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s;
+            font-weight: bold;
+        }
+
+        #yesBtn {
+            background-color: #d88bdf;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #753d3d;
+            color: white;
+            position: relative;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.8); 
+            font-size: 20px;
+            user-select: none;
+            z-index: 1;
+            animation: float 5s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .bear-img {
+            width: 250px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="content">
+            <h1>Will you be my Valentine? 🌹</h1>
+            <p>Pleeeeaseeee Pretty pleaseeeee</p>
+            <img style="width:325px" src="https://www.pbfingers.com/wp-content/uploads/2012/11/puss-in-boots_thumb.jpg" alt="big eyes cat">
+            <div class="buttons">
+                <button id="yesBtn" onclick="celebrate()">YES!</button>
+                <button id="noBtn" onmouseover="moveButton()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Floating hearts background
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '🤍'; // White hearts for the blue background
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+        setInterval(createHeart, 300);
+
+        // Make the "No" button run away
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            
+            btn.style.position = 'absolute';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        // The "YES" sequence
+        function celebrate() {
+            const content = document.getElementById('content');
+            content.innerHTML = `
+                <h1 style="color: #ff4081;">YAY! See you then! ❤️</h1>
+                <img src="https://media.tenor.com/HSxxt1scQXYAAAAM/cat-hugs.gif" alt="Cat with flowers" class="cat-img">
+                <p style="margin-top: 15px;">I'm so excited! 🥰</p>
+            `;
+            
+            // Optional: Increase heart frequency after saying yes
+            setInterval(createHeart, 100);
+        }
+    </script>
+</body>
+</html>
